@@ -1,7 +1,7 @@
 clminify
 ========
 
-A PHP minifier and cacher for JS and CSS based on JsMin+ and CssMin by Fabricio Sodnao
+A PHP minifier and cacher for JS and CSS based on JsMin+ and CssMin by Fabricio Sodano
 
 I have no idea about licenses, so do whatever you want with it (even say you did it, if it makes you happy :P),
 but I believe you're restricted by everyone elses's license.
