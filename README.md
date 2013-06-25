@@ -1,10 +1,61 @@
-clminify
-========
+# CLMinify
 
 A PHP minifier and cacher for JS and CSS based on JsMin+ and CssMin by Fabricio Sodano
 
 I have no idea about licenses, so do whatever you want with it (even say you did it, if it makes you happy :P),
-but I believe you're restricted by everyone elses's license.
+but I believe you're restricted by everyone elses's licenses.
+
+
+##How to use
+
+You incude the ```min.php``` script in your ```<script>``` or ```<link>``` tags and specify if it's a 
+js or css minification/caching that you're doing, that's the most basic usage.
+
+
+```html
+ 	<!-- Default configuration -->
+		<script type="text/javascript" src="../min.php?type=js"></script>
+		
+		<!-- Extra files -->
+		<script type="text/javascript" src="../min.php?type=js&files[][path]=example/js/test.js&files[][path]=example/js/test2.js"></script>
+		<link rel="stylesheet" href="../min.php?type=css" type="text/css" media="screen, projection" />
+		
+		<!-- Other configuration -->
+		<!--script type="text/javascript" src="../min.php?type=js&config=other"></script>
+		<link rel="stylesheet" href="../min.php?type=css&config=other" type="text/css" media="screen, projection" /-->
+```
+
+You can also add individual files or other configurations, by adding the ```&config=other``` parameter to the min.php
+file, of course, the "other" has to be replaced by a valid configuration specified by you in the "config" folder.
+
+
+
+```php
+//config/default.php <-- you can clone this file and create new configurations
+<?php 
+ /*
+ 	Scripts that should be loaded throughout your site!
+	*/
+ 
+	$minFiles = array( //<-- array named minFiles is mandatory!
+		array(
+			'path'=>'example/js/test.js', //<-- relative path from the executing file
+			'minify'=>true //<-- minify or just concat?
+		)
+	);
+```
+
+You can check the "example" folder for a working example.
+
+##How it works
+
+The minifier part is just an implementation of CSSMin and JS Minifier, this script just provides an extra layer
+for configuration.
+
+As for the caching, it creates a hash of the content of the concatenated files and re-creates it if they don't match
+(so you never have an outdated version of your scripts), if they do match, it just serves the .js stored in your server.
+
+##Credits
 
 The caching idea of the scripts was taken from here:
 
@@ -56,7 +107,7 @@ http://files.tweakers.net/jsminplus/jsminplus.zip
 
 CSS Minifier by Joe Scylla <joe.scylla@gmail.com>
 
- * @package  	CssMin
+ * @package   CssMin
  * @link		http://code.google.com/p/cssmin/
  * @author		Joe Scylla <joe.scylla@gmail.com>
  * @copyright	2008 - 2011 Joe Scylla <joe.scylla@gmail.com>
